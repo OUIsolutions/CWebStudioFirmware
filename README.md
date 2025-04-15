@@ -45,10 +45,11 @@ Compile your library as `.dll` (Windows) or `.so` (Linux) using a command like:
   ```bash
   gcc -shared -o mylib.so mylib.c -fPIC
   ```
-- **Windows**:
+- **mingw**:
   ```bash
-  gcc -shared -o mylib.dll mylib.c
+  i686-w64-mingw32-gcc -shared -o mylib.dll mylib.c
   ```
+
 
 Then, pass its path and the callback function name via CLI when starting the server:
 ```bash
@@ -65,24 +66,8 @@ The project uses the following libraries, included as dependencies:
 - **CArgvParseOne**: Library for parsing command line arguments.
 - **doTheWorldOne**: Utility library for operations like SHA generation and file handling.
 
-## Installation and Compilation
-
-### Prerequisites
-- A compatible C compiler (such as GCC).
-- Windows or Linux operating system (the code supports both via conditional directives).
-
-### Compilation Steps
-1. Clone or download this repository.
-2. Ensure the dependencies (`CWebStudioOne.c`, `CArgvParseOne.c`, `doTheWorldOne.c`) are in the `dependencies/` folder.
-3. Compile the project using a command like:
-   ```bash
-   gcc main.c -o cweb_firmware_server
-   ```
-   On Windows, you might need additional flags for linking dynamic libraries.
-4. Run the generated binary with the required arguments (see the **CLI Usage** section below).
 
 ## CLI Usage
-
 The server is configured exclusively via command line arguments. Below are the available flags, their descriptions, and usage examples.
 
 ### Mandatory Flags
