@@ -7,6 +7,7 @@ function Install_dependencies()
     end
     local comands = {
         "mkdir -p dependencies",
+        "curl -L https://github.com/OUIsolutions/DoTheWorld/releases/download/10.0.3/doTheWorldOne.c -o dependencies/doTheWorldOne.c",
         "curl -L https://github.com/OUIsolutions/C-argv-parser/releases/download/0.0.2/CArgvParseOne.c -o dependencies/CArgvParseOne.c",
         "curl -L https://github.com/OUIsolutions/CWebStudio/releases/download/4.0.0/CWebStudioOne.c -o dependencies/CWebStudioOne.c",
     }
