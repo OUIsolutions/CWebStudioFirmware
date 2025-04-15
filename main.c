@@ -37,6 +37,10 @@ char **global_argv;
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
+
+    
+
+
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
 
     if(!handler){
