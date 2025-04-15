@@ -22,6 +22,7 @@ const char *HELP_MESSAGE = "Usage: ./program [options]\n"
                            "  --allow_read_dynamic_lib         Allow reading the dynamic library via firmware route\n"
                            "  --allow_exit                     Allow server exit via firmware route\n"
                            "  --allow_update_firmware          Allow updating the dynamic library via firmware route\n"
+                           "  --version, -v                    Show the program version\n"
                            "  --help, -h                       Show this help message\n";
 
 const int FLAGS_SIZE = 2;
@@ -70,6 +71,11 @@ const char *ALLOW_UPDATE_FIRMWARE_FLAGS[]={
     "allow_update"
 };
 
+const char *VERSION_FLAGS[]={
+    "version",
+    "v"
+};
+
 //====================================ROUTES=========================================
 const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";
 const char *READ_DYNAMIC_LIB = "/cweb_firmware/read_dynamic_lib";
@@ -87,6 +93,7 @@ char password_sha[100] = {0};
 bool allow_read_dynamic_lib = false;
 bool allow_exit = false;
 bool allow_update_firmware = false;
+const char *VERSION = "0.1.0";
 
 //====================================MAIN SERVER=========================================
 
@@ -182,6 +189,11 @@ int main(int argc, char *argv[]){
 
     if (CArgvParse_is_flags_present(&args, HELP_FLAGS, FLAGS_SIZE) || CArgvParse_is_one_of_args_present(&args, HELP_FLAGS, FLAGS_SIZE)) {
         printf("%s", HELP_MESSAGE);
+        return 0;
+    }
+
+    if (CArgvParse_is_flags_present(&args, VERSION_FLAGS, FLAGS_SIZE)) {
+        printf("Version: %s\n", VERSION);
         return 0;
     }
 
