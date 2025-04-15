@@ -78,8 +78,17 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     if(strcmp(request->route, READ_DYNAMIC_LIB) == 0) {
-        return cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
+        CwebHttpResponse *response =  cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
+
+        DtwPath *path  = newDtwPath(dynamic_lib);
+        char *formmated = (char*)malloc(100 + strlen(dynamic_lib));
+        sprintf(formmated, "attachment; filename=%s", DtwPath_get_full_name(path));
+        CwebHttpResponse_add_header(response, "Content-Disposition", formmated);
+        free(formmated);
+        DtwPath_free(path);
+        return response;
     }
+
     if(strcmp(request->route, WRITE_DYNAMIC_LIB) == 0) {
         unsigned char *data = CwebHttpRequest_read_content(request,MAX_BODY);
         if(!data){
