@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.0.6" pages="2">
+  <diagram name="User Point of view" id="pW7hHVVPVdVcbDhEcFnb">
+    <mxGraphModel dx="2514" dy="2469" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-1" target="8NdC7l0lDa2l5-dlI2pK-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-1" value="NGNIX (80)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-2" target="8NdC7l0lDa2l5-dlI2pK-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-2" value="CWebFirmware(5000)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-4" target="8NdC7l0lDa2l5-dlI2pK-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-4" value="User Requisition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="-140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-9" target="8NdC7l0lDa2l5-dlI2pK-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-9" value="lib.so" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="690" y="330" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-10" target="8NdC7l0lDa2l5-dlI2pK-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-10" value="Loads the .so" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="370" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-13" target="8NdC7l0lDa2l5-dlI2pK-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-13" target="8NdC7l0lDa2l5-dlI2pK-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-13" value="Fail ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="390" y="505" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-17" value="500 Error" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="170" y="505" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8NdC7l0lDa2l5-dlI2pK-19" target="8NdC7l0lDa2l5-dlI2pK-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-19" value="Calls the callback function inside lib.so" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8NdC7l0lDa2l5-dlI2pK-21" value="Send the callback to user" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="390" y="860" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Developer point of view" id="8XhwZxVj_l52ERcuP_RE">
+    <mxGraphModel dx="53" dy="1624" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-0" />
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-1" parent="fcH8Qn2qbGhYnDqsY3vy-0" />
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="fcH8Qn2qbGhYnDqsY3vy-1" source="fcH8Qn2qbGhYnDqsY3vy-20" target="fcH8Qn2qbGhYnDqsY3vy-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-20" value="Devops calls to&amp;nbsp; upload lib.so" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="fcH8Qn2qbGhYnDqsY3vy-1">
+          <mxGeometry x="1090" y="-140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="fcH8Qn2qbGhYnDqsY3vy-1" source="fcH8Qn2qbGhYnDqsY3vy-22" target="fcH8Qn2qbGhYnDqsY3vy-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-22" value="NGNIX (80)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="fcH8Qn2qbGhYnDqsY3vy-1">
+          <mxGeometry x="1090" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="fcH8Qn2qbGhYnDqsY3vy-1" source="fcH8Qn2qbGhYnDqsY3vy-24" target="fcH8Qn2qbGhYnDqsY3vy-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-24" value="CWebFirmware(5000)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="fcH8Qn2qbGhYnDqsY3vy-1">
+          <mxGeometry x="1090" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="fcH8Qn2qbGhYnDqsY3vy-1" source="fcH8Qn2qbGhYnDqsY3vy-26" target="fcH8Qn2qbGhYnDqsY3vy-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-26" value="Replaces the lib.so" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="fcH8Qn2qbGhYnDqsY3vy-1">
+          <mxGeometry x="1090" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fcH8Qn2qbGhYnDqsY3vy-27" value="Send the 200 menssage" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="fcH8Qn2qbGhYnDqsY3vy-1">
+          <mxGeometry x="1110" y="505" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
