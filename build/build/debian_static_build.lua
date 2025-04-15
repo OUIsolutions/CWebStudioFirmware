@@ -11,7 +11,7 @@ function debian_static_build()
     local image = darwin.ship.create_machine("debian:latest")
     image.provider = CONTANIZER
     image.add_comptime_command("apt update")
-    image.add_comptime_command("apt add isntall gcc -y")
+    image.add_comptime_command("apt  install gcc -y")
 
     image.start({
         volumes = {

@@ -29,7 +29,7 @@ Description: SUMARY
 
     darwin.dtw.copy_any_overwriting(
 
-        "release/alpine_static_bin.out",
+        "release/debian_static_bin.out",
         '.cache/debian_static_build/project/usr/local/bin/' .. PROJECT_NAME
     )
     local POST_INSTALL = 
