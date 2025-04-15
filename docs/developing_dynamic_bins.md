@@ -25,11 +25,11 @@ CwebHttpResponse *request_handler(CwebHttpRequest *request, int argc, char *argv
 Compile your library as `.dll` (Windows) or `.so` (Linux) using a command like:
 - **Linux**:
 ```bash
-  gcc -shared -o mylib.so mylib.c -fPIC
+  gcc -shared  -fPIC -o mylib.so mylib.c
 ```
 - **mingw**:
 ```bash
-i686-w64-mingw32-gcc  -shared -o mylib.dll mylib.c -lws2_32
+i686-w64-mingw32-gcc -fPIC -shared -o mylib.dll mylib.c -lws2_32
 ```
 
 
