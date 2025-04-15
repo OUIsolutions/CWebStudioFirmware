@@ -75,6 +75,10 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_text("Server shutting down", 200);
     }
 
+    if(strcmp(request->route, READ_DYNAMIC_LIB) == 0) {
+        return cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
+    }
+
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
 
     if(!handler){
