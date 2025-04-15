@@ -2,7 +2,7 @@
 #include "dependencies/CWebStudioOne.c"
 #include "dependencies/CArgvParseOne.c"
 
-//====================================FLAGS=========================================
+//====================================CONSTS=========================================
 const int FLAGS_SIZE = 2;
 const char *PORTS_FLAGS[]={
     "port",
@@ -23,19 +23,20 @@ const char *HELP_FLAGS[]={
     "help",
     "h"
 };
-
+//====================================GLOBALS=========================================
+const char *dynamic_lib;
 
 //====================================NAMESPACE=========================================
 CwebNamespace cweb;
 CArgvParseNamespace argv_namespace;
 
-//====================================MAIN=========================================
+//====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     return cweb_send_var_html((char*)private_cweb_500, 500);
 }
-
+//====================================MAIN=========================================
 int main(int argc, char *argv[]){
     cweb = newCwebNamespace();
     argv_namespace = newCArgvParseNamespace();
@@ -48,11 +49,21 @@ int main(int argc, char *argv[]){
     }
     int port_num = atoi(port);
     if(port_num <= 0){
-        printf("Port not valid\n");
+        printf("--port not valid\n");
         return 1;
     }
    
+    dynamic_lib = argv_namespace.get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
+    if(!dynamic_lib){
+        printf("--dynamic_lib library not provided\n");
+        return 1;
+    }
+
+    bool single_process = argv_namespace.is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
+
+
     CwebServer server = newCwebSever(port_num, main_sever);
+    server.single_process = single_process;
     cweb.server.start(&server);
     return 0;
 }
