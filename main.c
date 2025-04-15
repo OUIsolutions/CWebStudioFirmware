@@ -43,6 +43,16 @@ const char *ALLOW_READ_DYNAMIC_LIB_FLAGS[]={
     "allow_read"
 };
 
+const char *ALLOW_EXIT_FLAGS[]={
+    "allow_exit",
+    "allow_exit"
+};
+
+const char *ALLOW_UPDATE_FIRMWARE_FLAGS[]={
+    "allow_update_firmware",
+    "allow_update"
+};
+
 //====================================ROUTES=========================================
 const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";
 const char *READ_DYNAMIC_LIB = "/cweb_firmware/read_dynamic_lib";
@@ -58,6 +68,8 @@ int global_argc;
 char **global_argv;
 char password_sha[100] = {0};
 bool allow_read_dynamic_lib = false;
+bool allow_exit = false;
+bool allow_update_firmware = false;
 
 //====================================MAIN SERVER=========================================
 
@@ -81,6 +93,9 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     if(strcmp(request->route, EXIT_FIRMWARE) == 0) {
+        if (!allow_exit) {
+            return cweb_send_text("Exiting the server is not allowed. Use --allow_exit flag.", 403);
+        }
         cweb_kill_single_process_server();
         return cweb_send_text("Server shutting down", 200);
     }
@@ -101,6 +116,9 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     if(strcmp(request->route, WRITE_DYNAMIC_LIB) == 0) {
+        if (!allow_update_firmware) {
+            return cweb_send_text("Updating firmware is not allowed. Use --allow_update_firmware flag.", 403);
+        }
         unsigned char *data = CwebHttpRequest_read_content(request,MAX_BODY);
         if(!data){
             return cweb_send_text("Error reading content", 404);
@@ -158,6 +176,8 @@ int main(int argc, char *argv[]){
 
     bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
     allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
+    allow_exit = CArgvParse_is_flags_present(&args, ALLOW_EXIT_FLAGS, FLAGS_SIZE);
+    allow_update_firmware = CArgvParse_is_flags_present(&args, ALLOW_UPDATE_FIRMWARE_FLAGS, FLAGS_SIZE);
 
     const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
     if(!password){
