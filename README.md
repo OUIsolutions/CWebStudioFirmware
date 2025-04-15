@@ -143,8 +143,7 @@ All routes under `/cweb_firmware` require authentication. If the password is not
     curl http://localhost:5000/hello
     ```
 
-## Building from Scratch
-a
+
 
 ## Security
 
