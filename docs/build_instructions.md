@@ -41,22 +41,28 @@ PROJECT_NAME = "CWebStudioFirmware"
 CONTANIZER   = "podman"
 VERSION      = "0.0.9"
 LICENSE      = "MIT"
-URL          = "https://github.com/OUIsolutions/Ai-RagTemplate"
-DESCRIPITION = "A Rag Based Template for C"
-FULLNAME     = "Ai-RagTemplate"
+URL          = "https://github.com/OUIsolutions/CWebStudioFirmware"
+DESCRIPITION = "."
+FULLNAME     = "OUIsolutions"
 EMAIL        = "mateusmoutinho01@gmail.com"
-SUMARY       = "A Rag Based Template for C"
+SUMARY       = "A firmware model for cwebstudio"
 YOUR_CHANGES = "--"
+COMPILER     = "gcc"
 ```
 
 
 ### Making your own build
 you can make your own build by using the following commands:
 ```bash
-darwin run_blueprint build/ --mode folder --encrypt_key "your_encryption_key" 
-```
-than you can compile with gcc in the way you want:
-```bash
- gcc src/main.c -DDEFINE_DEPENDENCIES -o my_executable
+darwin run_blueprint build/ --mode folder  
 ```
 
+than you can compile with gcc in the way you want:
+- **Linux** 
+```bash
+ gcc main.c -o CWebStudioFirmware
+```
+- **mingw** 
+```bash
+i686-w64-mingw32-gcc main.c -o CWebStudioFirmware.exe
+```
