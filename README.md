@@ -6,11 +6,7 @@ CWebFirmware is a CLI to be used in conjunction with [CWebStudio](https://github
 |Item                                                                                                                             | Description                                                           |
 |---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 |[CWebStudioFirmware.c](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.c)          | Amalgamation                                                          |
-|[CWebStudioFirmware.out](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.out)      | Linux Executable                                                      |
-|[CWebStudioFirmware.deb](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.deb)      | Debian Package                                                        |
-|[CWebStudioFirmware.rpm](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.rpm)      | Red Hat Package Manager                                               |
 |[CWebStudioFirmware.zip](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.zip)      | Zip Folder                                                            |
-|[CWebStudioFirmwarei32.exe](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmwarei32.exe)| Windows Executable                                                    |
 ## Overview
 
 ![User point of view](/assets/operation3.png)
