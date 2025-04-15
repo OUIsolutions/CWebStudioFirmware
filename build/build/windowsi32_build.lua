@@ -4,6 +4,7 @@ function windowsi32_build()
         return
     end
     windows_build_done = true
+    amalgamation_build()
 
     os.execute("mkdir -p release")
 
@@ -15,9 +16,8 @@ function windowsi32_build()
     image.start({
         volumes = {
             { "./release", "/release" },
-            { "./src",     "/src" },
             { "./dependencies",     "/dependencies" }
         },
-        command = "i686-w64-mingw32-gcc --static main.c -o /release/windowsi32.exe"
+        command = "i686-w64-mingw32-gcc --static /release/"..PROJECT_NAME..".c -o /release/windowsi32.exe"
     })
 end
