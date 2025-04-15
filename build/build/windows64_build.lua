@@ -18,7 +18,7 @@ function windowsi64_build()
             { "./release", "/release" },
             { "./dependencies",     "/dependencies" }
         },
-        command = "x86_64-w64-mingw32-gcc --static /release/"..PROJECT_NAME..".c -o /release/windowsi32.exe"
+        command = "x86_64-w64-mingw32-gcc --static /release/"..PROJECT_NAME..".c -lws2_32 -o /release/windowsi32.exe"
 
     })
 end

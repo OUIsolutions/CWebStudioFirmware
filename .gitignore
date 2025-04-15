@@ -6,6 +6,7 @@
 *.ko
 *.obj
 teste.c
+.cache
 TreinAiContext
 release
 CWebStudioFirmware
