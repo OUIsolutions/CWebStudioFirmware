@@ -40,7 +40,7 @@ const char *PASSWORD_FLAGS[]={
 
 const char *ALLOW_READ_DYNAMIC_LIB_FLAGS[]={
     "allow_read_dynamic_lib",
-    "r"
+    "allow_read"
 };
 
 //====================================ROUTES=========================================
