@@ -24,13 +24,13 @@ CwebHttpResponse *request_handler(CwebHttpRequest *request, int argc, char *argv
 ### Compiling the Dynamic Library
 Compile your library as `.dll` (Windows) or `.so` (Linux) using a command like:
 - **Linux**:
-  ```bash
+```bash
   gcc -shared -o mylib.so mylib.c -fPIC
-  ```
+```
 - **mingw**:
-  ```bash
-  i686-w64-mingw32-gcc -shared -o mylib.dll mylib.c
-  ```
+```bash
+i686-w64-mingw32-gcc  -shared -o mylib.dll mylib.c -lws2_32
+```
 
 
 Then, pass its path and the callback function name via CLI when starting the server:

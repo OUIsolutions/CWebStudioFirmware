@@ -7,6 +7,19 @@ CWebFirmware is a CLI to be used in conjunction with [CWebStudio](https://github
 |---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 |[CWebStudioFirmware.c](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.c)          | Amalgamation                                                          |
 |[CWebStudioFirmware.zip](https://github.com/OUIsolutions/CWebStudioFirmware/releases/download/0.1.1/CWebStudioFirmware.zip)      | Zip Folder                                                            |
+
+## Getting Started
+- **Linux**:
+```bash
+ gcc CWebStudioFirmware.c  -o CWebStudioFirmware
+```
+- **mingw**:
+```bash
+  i686-w64-mingw32-gcc -shared -o mylib.dll mylib.c -lws2_32
+```
+
+
+
 ## Overview
 
 ![User point of view](/assets/operation3.png)
