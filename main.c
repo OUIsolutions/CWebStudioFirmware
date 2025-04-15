@@ -180,7 +180,7 @@ int main(int argc, char *argv[]){
     global_argv = argv;
     CArgvParse args = newCArgvParse(argc,argv);
 
-    if (CArgvParse_is_flags_present(&args, HELP_FLAGS, FLAGS_SIZE)) {
+    if (CArgvParse_is_flags_present(&args, HELP_FLAGS, FLAGS_SIZE) || CArgvParse_is_one_of_args_present(&args, HELP_FLAGS, FLAGS_SIZE)) {
         printf("%s", HELP_MESSAGE);
         return 0;
     }
