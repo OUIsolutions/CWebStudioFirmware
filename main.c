@@ -12,6 +12,18 @@
 //====================================CONSTS=========================================
 const int MAX_BODY = 1000000000;
 
+const char *HELP_MESSAGE = "Usage: ./program [options]\n"
+                           "Options:\n"
+                           "  --port, -p <port>                Set the server port\n"
+                           "  --dynamic_lib, -d <path>         Path to the dynamic library\n"
+                           "  --callback, -c <name>            Callback function name in the dynamic library\n"
+                           "  --single_process, -s             Run server in single process mode (non-Windows only)\n"
+                           "  --password, --pass <password>    Password for firmware routes\n"
+                           "  --allow_read_dynamic_lib         Allow reading the dynamic library via firmware route\n"
+                           "  --allow_exit                     Allow server exit via firmware route\n"
+                           "  --allow_update_firmware          Allow updating the dynamic library via firmware route\n"
+                           "  --help, -h                       Show this help message\n";
+
 const int FLAGS_SIZE = 2;
 const char *PORTS_FLAGS[]={
     "port",
@@ -167,6 +179,11 @@ int main(int argc, char *argv[]){
     global_argc = argc;
     global_argv = argv;
     CArgvParse args = newCArgvParse(argc,argv);
+
+    if (CArgvParse_is_flags_present(&args, HELP_FLAGS, FLAGS_SIZE)) {
+        printf("%s", HELP_MESSAGE);
+        return 0;
+    }
 
     const char *port = CArgvParse_get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
     if(!port){
