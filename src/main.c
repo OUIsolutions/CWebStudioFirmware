@@ -11,7 +11,7 @@
 #include "consts.h"
 
 //====================================GLOBALS=========================================
-const char *dynamic_lib;
+char dynamic_lib_path[2000] = {0};
 const char *callback_name;
 int global_argc;
 char **global_argv;
@@ -54,10 +54,10 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         if (!allow_read_dynamic_lib) {
             return cweb_send_text("Reading dynamic library is not allowed. Use --allow_read_dynamic_lib flag.", 403);
         }
-        CwebHttpResponse *response =  cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
+        CwebHttpResponse *response =  cweb_send_file(dynamic_lib_path,CWEB_AUTO_SET_CONTENT, 200);
 
-        DtwPath *path  = newDtwPath(dynamic_lib);
-        char *formmated = (char*)malloc(100 + strlen(dynamic_lib));
+        DtwPath *path  = newDtwPath(dynamic_lib_path);
+        char *formmated = (char*)malloc(100 + strlen(dynamic_lib_path));
         sprintf(formmated, "attachment; filename=%s", DtwPath_get_full_name(path));
         CwebHttpResponse_add_header(response, "Content-Disposition", formmated);
         free(formmated);
@@ -73,7 +73,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         if(!data){
             return cweb_send_text("Error reading content", 404);
         }
-        dtw_write_any_content(dynamic_lib, data, request->content_length);
+        dtw_write_any_content(dynamic_lib_path, data, request->content_length);
         return cweb_send_text("Dynamic library updated", 202);
     }
 
@@ -86,7 +86,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) =
     (CwebHttpResponse *(*)(CwebHttpRequest *,int ,char*[]))GetProcAddress(handler,callback_name);
 #else
-    void *handler = dlopen(dynamic_lib, RTLD_LAZY);
+    void *handler = dlopen(dynamic_lib_path, RTLD_LAZY);
     if(!handler){
         printf("Error loading dynamic library: %s\n", dlerror());
         return cweb_send_var_html((char*)private_cweb_500, 500);
@@ -134,11 +134,23 @@ int main(int argc, char *argv[]){
         return 1;
     }
    
-    dynamic_lib = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
-    if(!dynamic_lib){
+    const char *dynamic_lib_entrie = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
+    if(!dynamic_lib_entrie){
         printf("--dynamic_lib library not provided\n");
         return 1;
     }
+    bool is_absolute = dtw_starts_with(dynamic_lib_entrie, "/") || dtw_starts_with(dynamic_lib_entrie, "\\");
+    if(is_absolute){
+       strcpy(dynamic_lib_path, dynamic_lib_entrie);
+    }
+    if(!is_absolute){
+        char *current_dir = dtw_get_current_dir();
+        char *joined = dtw_concat_path(current_dir, dynamic_lib_entrie);
+        strcpy(dynamic_lib_path, joined);
+        free(current_dir);
+        free(joined);
+    }
+
 
     callback_name = CArgvParse_get_flag(&args,CALLBACK_FLAGS,FLAGS_SIZE,0);
 
