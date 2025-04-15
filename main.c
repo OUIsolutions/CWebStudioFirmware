@@ -70,7 +70,10 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         free(user_password_sha);
     }
 
-    
+    if(strcmp(request->route, EXIT_FIRMWARE) == 0) {
+        cweb_kill_single_process_server();
+        return cweb_send_text("Server shutting down", 200);
+    }
 
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
 
