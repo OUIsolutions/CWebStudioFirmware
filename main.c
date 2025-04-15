@@ -1,6 +1,6 @@
-#include "dependencies/CWebStudio.h"
-#include "dependencies/CArgvParse.h"
-#include "dependencies/doTheWorld.h"
+#include "dependencies/CWebStudioOne.c"
+#include "dependencies/CArgvParseOne.c"
+#include "dependencies/doTheWorldOne.c"
 
 #ifdef _WIN32
 #include <windows.h>
