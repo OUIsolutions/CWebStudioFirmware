@@ -1,6 +1,7 @@
 
 #include "dependencies/CWebStudioOne.c"
 #include "dependencies/CArgvParseOne.c"
+#include <dlfcn.h>
 
 //====================================CONSTS=========================================
 const int FLAGS_SIZE = 2;
@@ -19,13 +20,18 @@ const char *SINGLE_PROCESS_FLAGS[]={
     "s"
 };
 
+const char *CALLBACK_FLAGS[]={
+    "callback",
+    "c"
+};
+
 const char *HELP_FLAGS[]={
     "help",
     "h"
 };
 //====================================GLOBALS=========================================
 const char *dynamic_lib;
-
+const char *callback_name;
 //====================================NAMESPACE=========================================
 CwebNamespace cweb;
 CArgvParseNamespace argv_namespace;
@@ -33,8 +39,20 @@ CArgvParseNamespace argv_namespace;
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
+    void *handler = dlopen(dynamic_lib, RTLD_LAZY);
 
-    return cweb_send_var_html((char*)private_cweb_500, 500);
+    if(!handler){
+        printf("Error loading dynamic library: %s\n", dlerror());
+        return cweb_send_var_html((char*)private_cweb_500, 500);
+    }
+
+    CwebHttpResponse *(*request_handler)(CwebHttpRequest *) = dlsym(handler,callback_name);
+
+    CwebHttpResponse *response = request_handler(request);
+    
+    dlclose(handler);
+
+    return response;
 }
 //====================================MAIN=========================================
 int main(int argc, char *argv[]){
@@ -59,11 +77,19 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
+    callback_name = argv_namespace.get_flag(&args,CALLBACK_FLAGS,FLAGS_SIZE,0);
+
+    if(!callback_name){
+        printf("--callback not provided\n");
+        return 1;
+    }
+
     bool single_process = argv_namespace.is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
 
 
     CwebServer server = newCwebSever(port_num, main_sever);
     server.single_process = single_process;
+    server.use_static =false;
     cweb.server.start(&server);
     return 0;
 }
