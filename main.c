@@ -1,6 +1,7 @@
 
 #include "dependencies/CWebStudioOne.c"
 #include "dependencies/CArgvParseOne.c"
+#include "dependencies/doTheWorldOne.c"
 #include <dlfcn.h>
 
 //====================================CONSTS=========================================
