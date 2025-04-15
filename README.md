@@ -139,7 +139,35 @@ CwebHttpResponse *request_handler(CwebHttpRequest *request, int argc, char *argv
   - `argc` and `argv`: Command line arguments passed to the server, allowing the library to access global configurations.
 - **Return**: A `CwebHttpResponse` object with the HTTP response to be sent to the client.
 
-Compile your library as `.dll` (Windows) or `.so` (Linux) and pass its path and the callback function name via CLI.
+### Basic Example: Simple Hello World Handler
+Below is a basic example of a dynamic library that responds with a "Hello, World!" message for any HTTP request. This is a minimal implementation to help you get started.
+
+```c
+#include "CWebStudioOne.c"
+
+CwebHttpResponse *request_handler(CwebHttpRequest *request, int argc, char *argv[]) {
+    CwebNamespace cweb = newCwebNamespace();
+    return cweb.response.send_text("Hello, World!", 200);
+}
+```
+
+### Compiling the Dynamic Library
+Compile your library as `.dll` (Windows) or `.so` (Linux) using a command like:
+- **Linux**:
+  ```bash
+  gcc -shared -o mylib.so mylib.c -fPIC
+  ```
+- **Windows**:
+  ```bash
+  gcc -shared -o mylib.dll mylib.c
+  ```
+
+Then, pass its path and the callback function name via CLI when starting the server:
+```bash
+./cweb_firmware_server --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword
+```
+
+This basic example shows how to create a simple dynamic library that returns a static response. You can expand on this by adding logic to handle different routes, methods, or request parameters as needed for your application.
 
 ## Limitations
 
