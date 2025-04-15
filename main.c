@@ -37,6 +37,12 @@ const char *PASSWORD_FLAGS[]={
     "password",
     "pass"
 };
+
+const char *ALLOW_READ_DYNAMIC_LIB_FLAGS[]={
+    "allow_read_dynamic_lib",
+    "r"
+};
+
 //====================================ROUTES=========================================
 const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";
 const char *READ_DYNAMIC_LIB = "/cweb_firmware/read_dynamic_lib";
@@ -51,6 +57,8 @@ const char *callback_name;
 int global_argc;
 char **global_argv;
 char password_sha[100] = {0};
+bool allow_read_dynamic_lib = false;
+
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
@@ -78,6 +86,9 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     if(strcmp(request->route, READ_DYNAMIC_LIB) == 0) {
+        if (!allow_read_dynamic_lib) {
+            return cweb_send_text("Reading dynamic library is not allowed. Use --allow_read_dynamic_lib flag.", 403);
+        }
         CwebHttpResponse *response =  cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
 
         DtwPath *path  = newDtwPath(dynamic_lib);
@@ -146,6 +157,7 @@ int main(int argc, char *argv[]){
     }
 
     bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
+    allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
 
     const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
     if(!password){
