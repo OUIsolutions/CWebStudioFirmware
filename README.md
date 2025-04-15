@@ -1,4 +1,4 @@
-# CWeb Firmware Server
+# CWeb Firmware
 
 Welcome to the **CWeb Firmware Server**, a web server built in C using the CWebStudio framework to handle HTTP requests and interact with dynamic libraries. This project allows loading and executing functions from dynamic libraries at runtime, while providing specific routes for firmware management such as reading, writing, and shutting down the server, all secured with password authentication.
 
