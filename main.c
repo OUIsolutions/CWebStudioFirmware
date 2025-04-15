@@ -96,7 +96,8 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_var_html((char*)private_cweb_500, 500);
     }
 
-    CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) = dlsym(handler,callback_name);
+    CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) =
+    (CwebHttpResponse *(*)(CwebHttpRequest *,int ,char*[]))dlsym(handler,callback_name);
     CwebHttpResponse *response = request_handler(request,global_argc,global_argv);
     
     dlclose(handler);
@@ -137,7 +138,7 @@ int main(int argc, char *argv[]){
 
     bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
 
-    char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
+    const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
     if(!password){
         printf("Password not provided\n");
         return 1;
