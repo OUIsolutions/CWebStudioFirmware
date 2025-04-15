@@ -15,7 +15,7 @@ CWebFirmware is a CLI to be used in conjunction with [CWebStudio](https://github
 ```
 - **mingw**:
 ```bash
-  i686-w64-mingw32-gcc -shared -o mylib.dll mylib.c -lws2_32
+  i686-w64-mingw32-gcc CWebStudioFirmware.c  -o CWebStudioFirmware.exe -lws2_32
 ```
 
 
