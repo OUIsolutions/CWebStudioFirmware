@@ -1,6 +1,6 @@
 # CWeb Firmware
 
-Welcome to the **CWeb Firmware Server**, a web server built in C using the CWebStudio framework to handle HTTP requests and interact with dynamic libraries. This project allows loading and executing functions from dynamic libraries at runtime, while providing specific routes for firmware management such as reading, writing, and shutting down the server, all secured with password authentication.
+Welcome to the **CWeb Firmware Server**, a web server built in C using the CWebStudio framework to handle HTTP requests and interact with dynamic libraries. This project allows loading and executing functions from dynamic libraries at runtime, while providing specific routes for firmware management such as reading, writing, and shutting down the firmware, all secured with password authentication.
 
 The server is highly configurable via command line arguments, enabling you to define ports, dynamic libraries, callbacks, and specific permissions for sensitive operations. Below, you'll find all the necessary information to understand, configure, and use this project.
 
@@ -16,9 +16,9 @@ This server is ideal for scenarios where you need a lightweight and secure envir
 
 
 
-## Developing Dynamic Libraries
+## Developing Dynamic Bins
 
-To create a dynamic library compatible with this server, you must implement a callback function with the following signature:
+To create a dynamic library bin compatible with this server, you must implement a callback function with the following signature:
 ```c
 CwebHttpResponse *request_handler(CwebHttpRequest *request, int argc, char *argv[]);
 ```
@@ -53,18 +53,10 @@ Compile your library as `.dll` (Windows) or `.so` (Linux) using a command like:
 
 Then, pass its path and the callback function name via CLI when starting the server:
 ```bash
-./cweb_firmware_server --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword
+CWebFirmware --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword
 ```
 
 This basic example shows how to create a simple dynamic library that returns a static response. You can expand on this by adding logic to handle different routes, methods, or request parameters as needed for your application.
-
-
-## Dependencies
-
-The project uses the following libraries, included as dependencies:
-- **CWebStudioOne**: Framework for creating web servers in C.
-- **CArgvParseOne**: Library for parsing command line arguments.
-- **doTheWorldOne**: Utility library for operations like SHA generation and file handling.
 
 
 ## CLI Usage
@@ -95,7 +87,7 @@ The server is configured exclusively via command line arguments. Below are the a
 
 ### Full Command Example
 ```bash
-./cweb_firmware_server --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword --allow_read_dynamic_lib --allow_exit --allow_update_firmware
+CWebFirmware --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword --allow_read_dynamic_lib --allow_exit --allow_update_firmware
 ```
 
 ### CLI Notes
@@ -157,25 +149,9 @@ All routes under `/cweb_firmware` require authentication. If the password is not
 - **Permissions**: Sensitive operations (reading, writing, and shutting down) are controlled by specific flags, ensuring the administrator has full control over what is allowed.
 - **Body Limit**: The server limits the request body size for write operations to 1GB (`MAX_BODY`), preventing memory abuse.
 
-
 ## Limitations
 
 - The single-process mode (`--single_process`) is only applicable on non-Windows systems.
 - Errors when loading dynamic libraries are displayed in the console, but there is no automatic recovery mechanism.
 - The server does not support static files (`use_static` is set to `false`).
 
-## Contribution
-
-If you’d like to contribute to this project, feel free to open issues or pull requests. Suggestions for improving security, adding new features, or fixing bugs are always welcome.
-
-## License
-
-This project does not specify a license in the provided code. For usage or distribution, contact the author or define an appropriate license.
-
-## Contact
-
-For questions or support, reach out to the main developer (information not provided in the code). Alternatively, open an issue in the project repository.
-
----
-
-There you go, hope this README covers everything! If you need tweaks or more details, just let me know. 😎
