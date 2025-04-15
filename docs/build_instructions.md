@@ -35,7 +35,7 @@ the default its:
 ```lua
 PROJECT_NAME = "CWebStudioFirmware"
 CONTANIZER   = "podman"
-VERSION      = "0.0.9"
+VERSION      = "0.2.1"
 LICENSE      = "MIT"
 URL          = "https://github.com/OUIsolutions/CWebStudioFirmware"
 DESCRIPITION = "."
