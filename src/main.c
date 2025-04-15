@@ -86,7 +86,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) =
     (CwebHttpResponse *(*)(CwebHttpRequest *,int ,char*[]))GetProcAddress(handler,callback_name);
 #else
-    void *handler = dlopen(dynamic_lib, RTLD_LOCAL);
+    void *handler = dlopen(dynamic_lib, RTLD_LAZY);
     if(!handler){
         printf("Error loading dynamic library: %s\n", dlerror());
         return cweb_send_var_html((char*)private_cweb_500, 500);
