@@ -1,7 +1,12 @@
 #include "dependencies/CWebStudioOne.c"
 #include "dependencies/CArgvParseOne.c"
 #include "dependencies/doTheWorldOne.c"
+
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <dlfcn.h>
+#endif
 #include <string.h>
 
 //====================================CONSTS=========================================
@@ -127,18 +132,31 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_text("Dynamic library updated", 202);
     }
 
+#ifdef _WIN32
+    HMODULE handler = LoadLibrary(dynamic_lib);
+    if(!handler){
+        printf("Error loading dynamic library: %lu\n", GetLastError());
+        return cweb_send_var_html((char*)private_cweb_500, 500);
+    }
+    CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) =
+    (CwebHttpResponse *(*)(CwebHttpRequest *,int ,char*[]))GetProcAddress(handler,callback_name);
+#else
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
-
     if(!handler){
         printf("Error loading dynamic library: %s\n", dlerror());
         return cweb_send_var_html((char*)private_cweb_500, 500);
     }
-
     CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) =
     (CwebHttpResponse *(*)(CwebHttpRequest *,int ,char*[]))dlsym(handler,callback_name);
+#endif
+
     CwebHttpResponse *response = request_handler(request,global_argc,global_argv);
     
+#ifdef _WIN32
+    FreeLibrary(handler);
+#else
     dlclose(handler);
+#endif
 
     return response;
 }
@@ -189,7 +207,9 @@ int main(int argc, char *argv[]){
     free(hash);
 
     CwebServer server = newCwebSever(port_num, main_sever);
+    #ifndef _WIN32
     server.single_process = single_process;
+    #endif 
     server.use_static =false;
     CwebServer_start(&server);
     return 0;
