@@ -35,15 +35,40 @@ const char *PASSWORD_FLAGS[]={
     "password",
     "pass"
 };
+//====================================ROUTES=========================================
+const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";
+const char *READ_DYNAMIC_LIB = "/cweb_firmware/read_dynamic_lib";
+const char *WRITE_DYNAMIC_LIB = "/cweb_firmware/write_dynamic_lib";
+const char *EXIT_FIRMWARE = "/cweb_firmware/exit";
+
+const char *PASSWORD_ENTRIE ="password";
+
 //====================================GLOBALS=========================================
 const char *dynamic_lib;
 const char *callback_name;
 int global_argc;
 char **global_argv;
-char password_sha[65] = {0};
+char password_sha[100] = {0};
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
+
+    if(dtw_starts_with(request->route, CWEB_FIRMWARE_ROUTE)) {
+        const char *provided_password = CwebHttpRequest_get_header(request, PASSWORD_ENTRIE);
+        if (provided_password == NULL) {
+            provided_password = CwebHttpRequest_get_param(request, PASSWORD_ENTRIE);
+        }
+
+        if (provided_password == NULL) {
+            return cweb_send_text("Password required for firmware route", 401);
+        }
+        char *user_password_sha   = dtw_generate_sha_from_string(provided_password);
+        if (strcmp(user_password_sha, password_sha) != 0) {
+            free(user_password_sha);
+            return cweb_send_text("Invalid password", 401);
+        }
+        free(user_password_sha);
+    }
 
     
 
@@ -95,14 +120,12 @@ int main(int argc, char *argv[]){
 
     bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
 
-    const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
+    char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
     if(!password){
         printf("Password not provided\n");
         return 1;
     }
-
-    DtwNamespace dtw = newDtwNamespace();
-    char *hash = dtw.generate_sha_from_string(password);
+    char *hash = dtw_generate_sha_from_string(password);
     strcpy(password_sha, hash);
     free(hash);
 
