@@ -35,7 +35,7 @@ i686-w64-mingw32-gcc -fPIC -shared -o mylib.dll mylib.c -lws2_32
 
 Then, pass its path and the callback function name via CLI when starting the server:
 ```bash
-CWebFirmware --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword
+CWebFirmware --port 5000 --dynamic_lib mylib.so --callback request_handler --password mysupersecretpassword
 ```
 
 This basic example shows how to create a simple dynamic library that returns a static response. You can expand on this by adding logic to handle different routes, methods, or request parameters as needed for your application.

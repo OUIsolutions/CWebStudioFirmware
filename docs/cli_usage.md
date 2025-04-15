@@ -27,7 +27,7 @@ The server is configured exclusively via command line arguments. Below are the a
 
 ### Full Command Example
 ```bash
-CWebFirmware --port 5000 --dynamic_lib ./mylib.so --callback request_handler --password mysupersecretpassword --allow_read_dynamic_lib --allow_exit --allow_update_firmware
+CWebFirmware --port 5000 --dynamic_lib mylib.so --callback request_handler --password mysupersecretpassword --allow_read_dynamic_lib --allow_exit --allow_update_firmware
 ```
 
 
