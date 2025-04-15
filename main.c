@@ -48,7 +48,6 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) = dlsym(handler,callback_name);
-
     CwebHttpResponse *response = request_handler(request,global_argc,global_argv);
     
     dlclose(handler);
