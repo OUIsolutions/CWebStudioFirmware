@@ -5,6 +5,8 @@
 #include <string.h>
 
 //====================================CONSTS=========================================
+const int MAX_BODY = 1000000000;
+
 const int FLAGS_SIZE = 2;
 const char *PORTS_FLAGS[]={
     "port",
@@ -77,6 +79,14 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     if(strcmp(request->route, READ_DYNAMIC_LIB) == 0) {
         return cweb_send_file(dynamic_lib,CWEB_AUTO_SET_CONTENT, 200);
+    }
+    if(strcmp(request->route, WRITE_DYNAMIC_LIB) == 0) {
+        unsigned char *data = CwebHttpRequest_read_content(request,MAX_BODY);
+        if(!data){
+            return cweb_send_text("Error reading content", 404);
+        }
+        dtw_write_any_content(dynamic_lib, data, request->content_length);
+        return cweb_send_text("Dynamic library updated", 202);
     }
 
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
