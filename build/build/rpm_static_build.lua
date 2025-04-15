@@ -4,7 +4,7 @@ function rpm_static_build()
         return
     end
     rpm_static_build_done = true
-    alpine_static_build()
+    debian_static_build()
     darwin.dtw.copy_any_overwriting("release/alpine_static_bin.out",
         ".cache/rpm_static_build/SOURCES/alpine_static_bin.out"
     )
