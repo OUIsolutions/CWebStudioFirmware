@@ -3,10 +3,8 @@
 CWebFirmware is a CLI to be used in conjunction with CWebStudio, designed to make updates to the server generating 0 downtime, where instead of running an executable directly, you import a dynamic library, which allows you to install the .so/.dll on the server without disabling the server that is running.
 
 ## Operation 
-![User point of view](/assets/operation.jpg)
+![User point of view](/assets/operation.png)
 
-## Uplpad 
-![Upload process](/assets/upload.jpg)
 
 ## Docs 
 |Item                                                           | Description                                                           |
