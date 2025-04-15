@@ -41,9 +41,18 @@ int main(int argc, char *argv[]){
     argv_namespace = newCArgvParseNamespace();
     CArgvParse args = argv_namespace.newCArgvParse(argc,argv);
 
-
-
-    CwebServer server = newCwebSever(5000, main_sever);
+    const char *port = argv_namespace.get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
+    if(!port){
+        printf("Port not provided\n");
+        return 1;
+    }
+    int port_num = atoi(port);
+    if(port_num <= 0){
+        printf("Port not valid\n");
+        return 1;
+    }
+   
+    CwebServer server = newCwebSever(port_num, main_sever);
     cweb.server.start(&server);
     return 0;
 }
