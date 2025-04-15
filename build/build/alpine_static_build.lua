@@ -5,7 +5,7 @@ function alpine_static_build()
         return
     end
     alpine_static_build_done = true
-
+    amalgamation_build()
     os.execute("mkdir -p release")
 
     local image = darwin.ship.create_machine("alpine:latest")
@@ -16,11 +16,10 @@ function alpine_static_build()
     image.start({
         volumes = {
             { "./release", "/release" },
-            { "./src",     "/src" },
             { "./dependencies",     "/dependencies" }
 
         },
-        command = "gcc --static main.c -o /release/alpine_static_bin.out"
+        command = "gcc --static /release/"..PROJECT_NAME..".c  -o /release/alpine_static_bin.out"
 
     })
 end
