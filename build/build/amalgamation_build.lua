@@ -6,7 +6,7 @@ function amalgamation_build()
     alreay_amalamated_done = true
 
 
-    local runtime = darwin.camalgamator.generate_amalgamation("main.c")
+    local runtime = darwin.camalgamator.generate_amalgamation("src/main.c")
     
   
     darwin.dtw.write_file("release/"..PROJECT_NAME..".c", runtime)
