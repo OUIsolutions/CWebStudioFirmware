@@ -35,7 +35,8 @@ const char *callback_name;
 //====================================NAMESPACE=========================================
 CwebNamespace cweb;
 CArgvParseNamespace argv_namespace;
-
+int global_argc;
+char **global_argv;
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
@@ -46,9 +47,9 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_var_html((char*)private_cweb_500, 500);
     }
 
-    CwebHttpResponse *(*request_handler)(CwebHttpRequest *) = dlsym(handler,callback_name);
+    CwebHttpResponse *(*request_handler)(CwebHttpRequest *,int ,char*[]) = dlsym(handler,callback_name);
 
-    CwebHttpResponse *response = request_handler(request);
+    CwebHttpResponse *response = request_handler(request,global_argc,global_argv);
     
     dlclose(handler);
 
@@ -56,8 +57,11 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 }
 //====================================MAIN=========================================
 int main(int argc, char *argv[]){
+
     cweb = newCwebNamespace();
     argv_namespace = newCArgvParseNamespace();
+    global_argc = argc;
+    global_argv = argv;
     CArgvParse args = argv_namespace.newCArgvParse(argc,argv);
 
     const char *port = argv_namespace.get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
