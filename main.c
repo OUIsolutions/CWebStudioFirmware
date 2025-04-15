@@ -1,8 +1,8 @@
-
 #include "dependencies/CWebStudioOne.c"
 #include "dependencies/CArgvParseOne.c"
 #include "dependencies/doTheWorldOne.c"
 #include <dlfcn.h>
+#include <string.h>
 
 //====================================CONSTS=========================================
 const int FLAGS_SIZE = 2;
@@ -30,17 +30,22 @@ const char *HELP_FLAGS[]={
     "help",
     "h"
 };
+
+const char *PASSWORD_FLAGS[]={
+    "password",
+    "pass"
+};
 //====================================GLOBALS=========================================
 const char *dynamic_lib;
 const char *callback_name;
 int global_argc;
 char **global_argv;
+char password_sha[65] = {0};
 //====================================MAIN SERVER=========================================
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     
-
 
     void *handler = dlopen(dynamic_lib, RTLD_LAZY);
 
@@ -90,6 +95,16 @@ int main(int argc, char *argv[]){
 
     bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
 
+    const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
+    if(!password){
+        printf("Password not provided\n");
+        return 1;
+    }
+
+    DtwNamespace dtw = newDtwNamespace();
+    char *hash = dtw.generate_sha_from_string(password);
+    strcpy(password_sha, hash);
+    free(hash);
 
     CwebServer server = newCwebSever(port_num, main_sever);
     server.single_process = single_process;

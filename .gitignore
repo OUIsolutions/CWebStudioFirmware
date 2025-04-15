@@ -6,6 +6,7 @@
 *.ko
 *.obj
 teste.c
+TreinAiContext
 *.elf
 dependencies
 # Linker output
