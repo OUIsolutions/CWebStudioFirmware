@@ -32,9 +32,6 @@ const char *HELP_FLAGS[]={
 //====================================GLOBALS=========================================
 const char *dynamic_lib;
 const char *callback_name;
-//====================================NAMESPACE=========================================
-CwebNamespace cweb;
-CArgvParseNamespace argv_namespace;
 int global_argc;
 char **global_argv;
 //====================================MAIN SERVER=========================================
@@ -57,13 +54,12 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 //====================================MAIN=========================================
 int main(int argc, char *argv[]){
 
-    cweb = newCwebNamespace();
-    argv_namespace = newCArgvParseNamespace();
+   
     global_argc = argc;
     global_argv = argv;
-    CArgvParse args = argv_namespace.newCArgvParse(argc,argv);
+    CArgvParse args = newCArgvParse(argc,argv);
 
-    const char *port = argv_namespace.get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
+    const char *port = CArgvParse_get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
     if(!port){
         printf("Port not provided\n");
         return 1;
@@ -74,25 +70,25 @@ int main(int argc, char *argv[]){
         return 1;
     }
    
-    dynamic_lib = argv_namespace.get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
+    dynamic_lib = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
     if(!dynamic_lib){
         printf("--dynamic_lib library not provided\n");
         return 1;
     }
 
-    callback_name = argv_namespace.get_flag(&args,CALLBACK_FLAGS,FLAGS_SIZE,0);
+    callback_name = CArgvParse_get_flag(&args,CALLBACK_FLAGS,FLAGS_SIZE,0);
 
     if(!callback_name){
         printf("--callback not provided\n");
         return 1;
     }
 
-    bool single_process = argv_namespace.is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
+    bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
 
 
     CwebServer server = newCwebSever(port_num, main_sever);
     server.single_process = single_process;
     server.use_static =false;
-    cweb.server.start(&server);
+    CwebServer_start(&server);
     return 0;
 }
