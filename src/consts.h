@@ -1,3 +1,8 @@
+
+
+#ifndef CONSTS_H
+#define CONSTS_H
+
 //====================================CONSTS=========================================
 const int MAX_BODY = 1000000000;
 
@@ -72,3 +77,4 @@ const char *WRITE_DYNAMIC_LIB = "/cweb_firmware/write_dynamic_lib";
 const char *EXIT_FIRMWARE = "/cweb_firmware/exit";
 
 const char *PASSWORD_ENTRIE ="password";
+#endif 
