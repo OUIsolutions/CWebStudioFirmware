@@ -55,9 +55,3 @@ All routes under `/cweb_firmware` require authentication. If the password is not
 - **Permissions**: Sensitive operations (reading, writing, and shutting down) are controlled by specific flags, ensuring the administrator has full control over what is allowed.
 - **Body Limit**: The server limits the request body size for write operations to 1GB (`MAX_BODY`), preventing memory abuse.
 
-## Limitations
-
-- The single-process mode (`--single_process`) is only applicable on non-Windows systems.
-- Errors when loading dynamic libraries are displayed in the console, but there is no automatic recovery mechanism.
-- The server does not support static files (`use_static` is set to `false`).
-

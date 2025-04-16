@@ -11,7 +11,6 @@ const char *HELP_MESSAGE = "Usage: ./program [options]\n"
                            "  --port, -p <port>                Set the server port\n"
                            "  --dynamic_lib, -d <path>         Path to the dynamic library\n"
                            "  --callback, -c <name>            Callback function name in the dynamic library\n"
-                           "  --single_process, -s             Run server in single process mode (non-Windows only)\n"
                            "  --password, --pass <password>    Password for firmware routes\n"
                            "  --allow_read_dynamic_lib         Allow reading the dynamic library via firmware route\n"
                            "  --allow_exit                     Allow server exit via firmware route\n"
@@ -28,11 +27,6 @@ const char *PORTS_FLAGS[]={
 const char *DYNAMIC_LIV_FLAGS[]={
     "dynamic_lib",
     "d"
-};
-
-const char *SINGLE_PROCESS_FLAGS[]={
-    "single_process",
-    "s"
 };
 
 const char *CALLBACK_FLAGS[]={

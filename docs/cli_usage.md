@@ -14,8 +14,7 @@ The server is configured exclusively via command line arguments. Below are the a
   - Example: `--password mysupersecretpassword`
 
 ### Optional Flags
-- **`--single_process` or `-s`**: Runs the server in single-process mode (applicable only on non-Windows systems).
-  - Example: `--single_process`
+
 - **`--allow_read_dynamic_lib` or `--allow_read`**: Allows the dynamic library to be read and downloaded via an HTTP route.
   - Example: `--allow_read_dynamic_lib`
 - **`--allow_exit` or `--allow_exit`**: Allows the server to be shut down via an HTTP route.
@@ -34,4 +33,4 @@ CWebFirmware --port 5000 --dynamic_lib mylib.so --callback request_handler --pas
 
 ### CLI Notes
 - If any mandatory flag is missing or invalid (e.g., port less than or equal to 0), the server will display an error message and terminate.
-- Boolean flags like `--single_process` do not require values; their presence enables the functionality.
+- Boolean flags like `--allow_read_dynamic_lib` do not require values; their presence enables the functionality.
