@@ -9,7 +9,7 @@ char password_sha[100] = {0};
 bool allow_read_dynamic_lib = false;
 bool allow_exit = false;
 bool allow_update_firmware = false;
-const char *VERSION = "0.2.1";
+const char *VERSION = "0.2.2";
 
 
 #endif
