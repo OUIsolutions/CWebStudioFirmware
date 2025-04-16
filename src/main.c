@@ -70,7 +70,6 @@ int main(int argc, char *argv[]){
 
 
 
-    bool single_process = CArgvParse_is_flags_present(&args,SINGLE_PROCESS_FLAGS,FLAGS_SIZE);
     allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
     allow_exit = CArgvParse_is_flags_present(&args, ALLOW_EXIT_FLAGS, FLAGS_SIZE);
     allow_update_firmware = CArgvParse_is_flags_present(&args, ALLOW_UPDATE_FIRMWARE_FLAGS, FLAGS_SIZE);
@@ -89,10 +88,6 @@ int main(int argc, char *argv[]){
     }
 
     CwebServer server = newCwebSever(port_num, main_sever);
-    #ifndef _WIN32
-    server.single_process = single_process;
-    #endif 
-    server.use_static =false;
     CwebServer_start(&server);
     return 0;
 }
