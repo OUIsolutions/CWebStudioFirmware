@@ -30,16 +30,19 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    const char *port = CArgvParse_get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
-    if(!port){
+    starter_callback_name = CArgvParse_get_flag(&args,STARTER_CALLBACK_FLAGS,FLAGS_SIZE,0);
+    int port_num = -1;
+    if(!starter_callback_name){
+        const char *port = CArgvParse_get_flag(&args,PORTS_FLAGS,FLAGS_SIZE,0);
         printf("Port not provided\n");
         return 1;
+        port_num = atoi(port);
+        if(port_num <= 0){
+            printf("--port not valid\n");
+            return 1;
+        }
     }
-    int port_num = atoi(port);
-    if(port_num <= 0){
-        printf("--port not valid\n");
-        return 1;
-    }
+
    
     const char *dynamic_lib_entrie = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
     if(!dynamic_lib_entrie){
@@ -66,7 +69,6 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    starter_callback_name = CArgvParse_get_flag(&args,STARTER_CALLBACK_FLAGS,FLAGS_SIZE,0);
     allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
     allow_exit = CArgvParse_is_flags_present(&args, ALLOW_EXIT_FLAGS, FLAGS_SIZE);
     allow_update_firmware = CArgvParse_is_flags_present(&args, ALLOW_UPDATE_FIRMWARE_FLAGS, FLAGS_SIZE);
