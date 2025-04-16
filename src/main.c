@@ -93,13 +93,13 @@ int main(int argc, char *argv[]){
                 printf("Error loading dynamic library for starter callback: %lu\n", GetLastError());
                 return 1;
             }
-            CwebServer (*starter_callback)() = (CwebServer (*)())GetProcAddress(handler,starter_callback_name);
+            CwebServer (*starter_callback)(int argc, char *argv[]) = (CwebServer (*)(int argc, char *argv))dlsym(handler,starter_callback_name);
             if(!starter_callback){
                 printf("Starter callback function not found\n");
                 FreeLibrary(handler);
                 return 1;
             }
-            server = starter_callback();
+            server = starter_callback(argc,argv);
             CwebServer_start(&server);
             FreeLibrary(handler);
             return 0;
@@ -109,13 +109,13 @@ int main(int argc, char *argv[]){
                 printf("Error loading dynamic library for starter callback: %s\n", dlerror());
                 return 1;
             }
-            CwebServer (*starter_callback)() = (CwebServer (*)())dlsym(handler,starter_callback_name);
+            CwebServer (*starter_callback)(int argc, char *argv[]) = (CwebServer (*)(int argc, char *argv))dlsym(handler,starter_callback_name);
             if(!starter_callback){
                 printf("Starter callback function not found\n");
                 dlclose(handler);
                 return 1;
             }
-            server = starter_callback();
+            server = starter_callback(argc,argv);
             CwebServer_start(&server);
             dlclose(handler);
             return 0;
