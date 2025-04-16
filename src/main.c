@@ -1,4 +1,3 @@
-
 #include "consts.h"
 
 #include "../dependencies/CWebStudioOne.c"
@@ -67,7 +66,7 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-
+    starter_callback_name = CArgvParse_get_flag(&args,STARTER_CALLBACK_FLAGS,FLAGS_SIZE,0);
 
 
     allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
@@ -87,7 +86,40 @@ int main(int argc, char *argv[]){
 
     }
 
-    CwebServer server = newCwebSever(port_num, main_sever);
+    CwebServer server;
+    if(starter_callback_name){
+        #ifdef _WIN32
+        HMODULE handler = LoadLibrary(dynamic_lib_path);
+        if(!handler){
+            printf("Error loading dynamic library for starter callback: %lu\n", GetLastError());
+            return 1;
+        }
+        CwebServer (*starter_callback)() = (CwebServer (*)())GetProcAddress(handler,starter_callback_name);
+        if(!starter_callback){
+            printf("Starter callback function not found\n");
+            FreeLibrary(handler);
+            return 1;
+        }
+        server = starter_callback();
+        FreeLibrary(handler);
+        #else
+        void *handler = dlopen(dynamic_lib_path, RTLD_LAZY);
+        if(!handler){
+            printf("Error loading dynamic library for starter callback: %s\n", dlerror());
+            return 1;
+        }
+        CwebServer (*starter_callback)() = (CwebServer (*)())dlsym(handler,starter_callback_name);
+        if(!starter_callback){
+            printf("Starter callback function not found\n");
+            dlclose(handler);
+            return 1;
+        }
+        server = starter_callback();
+        dlclose(handler);
+        #endif
+    } else {
+        server = newCwebSever(port_num, main_sever);
+    }
     CwebServer_start(&server);
     return 0;
 }

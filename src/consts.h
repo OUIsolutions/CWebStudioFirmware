@@ -1,5 +1,3 @@
-
-
 #ifndef CONSTS_H
 #define CONSTS_H
 
@@ -11,6 +9,7 @@ const char *HELP_MESSAGE = "Usage: ./program [options]\n"
                            "  --port, -p <port>                Set the server port\n"
                            "  --dynamic_lib, -d <path>         Path to the dynamic library\n"
                            "  --callback, -c <name>            Callback function name in the dynamic library\n"
+                           "  --starter_callback, -s <name>    Starter callback function name to initialize server\n"
                            "  --password, --pass <password>    Password for firmware routes\n"
                            "  --allow_read_dynamic_lib         Allow reading the dynamic library via firmware route\n"
                            "  --allow_exit                     Allow server exit via firmware route\n"
@@ -32,6 +31,11 @@ const char *DYNAMIC_LIV_FLAGS[]={
 const char *CALLBACK_FLAGS[]={
     "callback",
     "c"
+};
+
+const char *STARTER_CALLBACK_FLAGS[]={
+    "starter_callback",
+    "s"
 };
 
 const char *HELP_FLAGS[]={
@@ -71,4 +75,4 @@ const char *WRITE_DYNAMIC_LIB = "/cweb_firmware/write_dynamic_lib";
 const char *EXIT_FIRMWARE = "/cweb_firmware/exit";
 
 const char *PASSWORD_ENTRIE ="password";
-#endif 
+#endif
