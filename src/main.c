@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
     }
 
 
-    callback_name = CArgvParse_get_flag(&args,CALLBACK_FLAGS,FLAGS_SIZE,0);
+    callback_name = CArgvParse_get_flag(&args,MAIN_SERVER_CALLBACK_FLAGS,FLAGS_SIZE,0);
 
     if(!callback_name){
         printf("--callback not provided\n");
@@ -67,8 +67,6 @@ int main(int argc, char *argv[]){
     }
 
     starter_callback_name = CArgvParse_get_flag(&args,STARTER_CALLBACK_FLAGS,FLAGS_SIZE,0);
-
-
     allow_read_dynamic_lib = CArgvParse_is_flags_present(&args, ALLOW_READ_DYNAMIC_LIB_FLAGS, FLAGS_SIZE);
     allow_exit = CArgvParse_is_flags_present(&args, ALLOW_EXIT_FLAGS, FLAGS_SIZE);
     allow_update_firmware = CArgvParse_is_flags_present(&args, ALLOW_UPDATE_FIRMWARE_FLAGS, FLAGS_SIZE);
