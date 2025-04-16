@@ -3,7 +3,6 @@
 
 char dynamic_lib_path[2000] = {0};
 const char *callback_name;
-const char *starter_callback_name;
 int global_argc;
 char **global_argv;
 char password_sha[100] = {0};

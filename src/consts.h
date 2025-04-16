@@ -29,14 +29,10 @@ const char *DYNAMIC_LIV_FLAGS[]={
 };
 
 const char *MAIN_SERVER_CALLBACK_FLAGS[]={
-    "main_callback",
+    "callback",
     "c"
 };
 
-const char *STARTER_CALLBACK_FLAGS[]={
-    "starter_callback",
-    "starter"
-};
 
 const char *HELP_FLAGS[]={
     "help",
