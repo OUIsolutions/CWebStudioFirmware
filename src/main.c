@@ -26,6 +26,12 @@ const char *VERSION = "0.1.0";
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     if(dtw_starts_with(request->route, CWEB_FIRMWARE_ROUTE)) {
+
+        if(!allow_exit && !allow_read_dynamic_lib && !allow_update_firmware){
+           return cweb_send_text("Firmware route not allowed. Use --allow_exit, --allow_read_dynamic_lib or --allow_update_firmware flag.", 403);
+        }
+
+
         const char *provided_password = CwebHttpRequest_get_header(request, PASSWORD_ENTRIE);
         if (provided_password == NULL) {
             provided_password = CwebHttpRequest_get_param(request, PASSWORD_ENTRIE);
@@ -164,14 +170,18 @@ int main(int argc, char *argv[]){
     allow_exit = CArgvParse_is_flags_present(&args, ALLOW_EXIT_FLAGS, FLAGS_SIZE);
     allow_update_firmware = CArgvParse_is_flags_present(&args, ALLOW_UPDATE_FIRMWARE_FLAGS, FLAGS_SIZE);
 
-    const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
-    if(!password){
-        printf("Password not provided\n");
-        return 1;
+    //means password its required
+    if (allow_exit || allow_update_firmware || allow_read_dynamic_lib){
+        const char *password = CArgvParse_get_flag(&args,PASSWORD_FLAGS,FLAGS_SIZE,0);
+        if(!password){
+            printf("Password not provided\n");
+            return 1;
+        }
+        char *hash = dtw_generate_sha_from_string(password);
+        strcpy(password_sha, hash);
+        free(hash);
+
     }
-    char *hash = dtw_generate_sha_from_string(password);
-    strcpy(password_sha, hash);
-    free(hash);
 
     CwebServer server = newCwebSever(port_num, main_sever);
     #ifndef _WIN32
