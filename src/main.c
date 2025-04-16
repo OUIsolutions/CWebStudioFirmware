@@ -86,40 +86,46 @@ int main(int argc, char *argv[]){
 
     }
 
+    
     CwebServer server;
     if(starter_callback_name){
         #ifdef _WIN32
-        HMODULE handler = LoadLibrary(dynamic_lib_path);
-        if(!handler){
-            printf("Error loading dynamic library for starter callback: %lu\n", GetLastError());
-            return 1;
-        }
-        CwebServer (*starter_callback)() = (CwebServer (*)())GetProcAddress(handler,starter_callback_name);
-        if(!starter_callback){
-            printf("Starter callback function not found\n");
+            HMODULE handler = LoadLibrary(dynamic_lib_path);
+            if(!handler){
+                printf("Error loading dynamic library for starter callback: %lu\n", GetLastError());
+                return 1;
+            }
+            CwebServer (*starter_callback)() = (CwebServer (*)())GetProcAddress(handler,starter_callback_name);
+            if(!starter_callback){
+                printf("Starter callback function not found\n");
+                FreeLibrary(handler);
+                return 1;
+            }
+            server = starter_callback();
+            CwebServer_start(&server);
             FreeLibrary(handler);
-            return 1;
-        }
-        server = starter_callback();
-        FreeLibrary(handler);
+            return 0;
         #else
-        void *handler = dlopen(dynamic_lib_path, RTLD_LAZY);
-        if(!handler){
-            printf("Error loading dynamic library for starter callback: %s\n", dlerror());
-            return 1;
-        }
-        CwebServer (*starter_callback)() = (CwebServer (*)())dlsym(handler,starter_callback_name);
-        if(!starter_callback){
-            printf("Starter callback function not found\n");
+            void *handler = dlopen(dynamic_lib_path, RTLD_LAZY);
+            if(!handler){
+                printf("Error loading dynamic library for starter callback: %s\n", dlerror());
+                return 1;
+            }
+            CwebServer (*starter_callback)() = (CwebServer (*)())dlsym(handler,starter_callback_name);
+            if(!starter_callback){
+                printf("Starter callback function not found\n");
+                dlclose(handler);
+                return 1;
+            }
+            server = starter_callback();
+            CwebServer_start(&server);
             dlclose(handler);
-            return 1;
-        }
-        server = starter_callback();
-        dlclose(handler);
+            return 0;
         #endif
-    } else {
-        server = newCwebSever(port_num, main_sever);
-    }
+    } 
+
+
+    server = newCwebSever(port_num, main_sever);
     CwebServer_start(&server);
     return 0;
 }
