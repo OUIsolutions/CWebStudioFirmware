@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     }
 
     if (CArgvParse_is_flags_present(&args, VERSION_FLAGS, FLAGS_SIZE)) {
-        printf("Version: %s\n", VERSION);
+        printf("CWebStudioFirmware: %s\n", VERSION);
         return 0;
     }
 
