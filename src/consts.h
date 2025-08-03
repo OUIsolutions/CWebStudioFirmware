@@ -63,6 +63,10 @@ const char *VERSION_FLAGS[]={
     "version",
     "v"
 };
+const char *TIMEOUT_FLAGS[]={
+    "timeout",
+    "t"
+};
 
 //====================================ROUTES=========================================
 const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";

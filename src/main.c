@@ -40,8 +40,11 @@ int main(int argc, char *argv[]){
         printf("--port not valid\n");
         return 1;
     }
-
-
+    int timeout = 90; //two minuts
+    const char *timeout_flag = CArgvParse_get_flag(&args, TIMEOUT_FLAGS, FLAGS_SIZE, 0);
+    if(timeout_flag){
+        timeout = atoi(timeout_flag);
+    }
    
     const char *dynamic_lib_entrie = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
     if(!dynamic_lib_entrie){
@@ -87,6 +90,7 @@ int main(int argc, char *argv[]){
 
     
     CwebServer server = newCwebSever(port_num, main_sever);
+    server.function_timeout = timeout;
     CwebServer_start(&server);
     return 0;
 }
