@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         printf("--port not valid\n");
         return 1;
     }
-    int timeout = 180; //two minuts
+    int timeout = 500; 
     const char *timeout_flag = CArgvParse_get_flag(&args, TIMEOUT_FLAGS, FLAGS_SIZE, 0);
     if(timeout_flag){
         timeout = atoi(timeout_flag);
