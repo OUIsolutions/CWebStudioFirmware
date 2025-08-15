@@ -91,6 +91,8 @@ int main(int argc, char *argv[]){
     
     CwebServer server = newCwebSever(port_num, main_sever);
     server.function_timeout = timeout;
+    server.client_timeout = 500;
+
     CwebServer_start(&server);
     return 0;
 }
