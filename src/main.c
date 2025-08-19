@@ -90,7 +90,7 @@ int main(int argc, char *argv[]){
 
     
     CwebServer server = newCwebSever(port_num, main_sever);
-    server.function_timeout = timeout;
+    server.function_timeout = 500;
     server.client_timeout = 500;
 
     CwebServer_start(&server);
