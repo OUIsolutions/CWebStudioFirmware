@@ -92,7 +92,6 @@ int main(int argc, char *argv[]){
     CwebServer server = newCwebSever(port_num, main_sever);
     server.function_timeout = 500;
     server.client_timeout = 500;
-    server.allow_cors = false;
     CwebServer_start(&server);
     return 0;
 }
