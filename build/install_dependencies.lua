@@ -5,7 +5,7 @@ function Install_dependencies()
     local libs = {
         { url = "https://github.com/OUIsolutions/DoTheWorld/releases/download/10.0.1/doTheWorldOne.c", path = "dependencies/doTheWorldOne.c" },
         { url = "https://github.com/OUIsolutions/C-argv-parser/releases/download/0.0.1/CArgvParseOne.c", path = "dependencies/CArgvParseOne.c" },
-        {url = "https://github.com/OUIsolutions/CWebStudio/releases/download/4.1.0/CWebStudioOne.c" , path = "dependencies/CWebStudioOne.c"},
+        {url = "https://github.com/OUIsolutions/CWebStudio/releases/download/5.0.1/CWebStudioOne.c" , path = "dependencies/CWebStudioOne.c"},
     }
     for _, lib in ipairs(libs) do
         local executor = function()
