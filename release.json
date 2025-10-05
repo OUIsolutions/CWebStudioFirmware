@@ -7,5 +7,5 @@
    "release": "{BIG_VERSION}.{SMALL_VERSION}.{PATCH_VERSION}",
    "tag": "{BIG_VERSION}.{SMALL_VERSION}.{PATCH_VERSION}",
    "description": "cwebstudio firmware release",
-   "assets": ["release/CWebStudioFirmware.c", "CWebStudioFirmware.zip"]
+   "assets": ["release/CWebStudioFirmware.c", "release/CWebStudioFirmware.zip"]
 }
