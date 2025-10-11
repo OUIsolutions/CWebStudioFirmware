@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         printf("--port not valid\n");
         return 1;
     }   
-    int function_timeout = 500;
+    int function_timeout = 3000;
     const char *function_timeout_flag = CArgvParse_get_flag(&args, FUNCTION_TIMEOUT_FLAGS, FLAGS_SIZE, 0);
     if(function_timeout_flag){
         function_timeout = atoi(function_timeout_flag);
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
         printf("--timeout not valid\n");
         return 1;
     }
-    int client_timeout = 500;
+    int client_timeout = 3000;
     const char *client_timeout_flag = CArgvParse_get_flag(&args, CLIENT_TIMEOUT_FLAGS, FLAGS_SIZE, 1);
     if(client_timeout_flag){
         client_timeout = atoi(client_timeout_flag);
