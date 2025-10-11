@@ -23,7 +23,7 @@ const char *PORTS_FLAGS[]={
     "p"
 };
 
-const char *DYNAMIC_LIV_FLAGS[]={
+const char *DYNAMIC_LIB_FLAGS[]={
     "dynamic_lib",
     "d"
 };
@@ -63,10 +63,16 @@ const char *VERSION_FLAGS[]={
     "version",
     "v"
 };
-const char *TIMEOUT_FLAGS[]={
-    "timeout",
+const char *FUNCTION_TIMEOUT_FLAGS[]={
+    "function_timeout",
     "t"
 };
+
+const char *CLIENT_TIMEOUT_FLAGS[]={
+    "client_timeout",
+    "ct"
+};  
+
 
 //====================================ROUTES=========================================
 const char *CWEB_FIRMWARE_ROUTE = "/cweb_firmware";

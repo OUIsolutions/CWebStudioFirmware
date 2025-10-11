@@ -39,18 +39,32 @@ int main(int argc, char *argv[]){
     if(port_num <= 0){
         printf("--port not valid\n");
         return 1;
+    }   
+    int function_timeout = 500;
+    const char *function_timeout_flag = CArgvParse_get_flag(&args, FUNCTION_TIMEOUT_FLAGS, FLAGS_SIZE, 0);
+    if(function_timeout_flag){
+        function_timeout = atoi(function_timeout_flag);
     }
-    int timeout = 500; 
-    const char *timeout_flag = CArgvParse_get_flag(&args, TIMEOUT_FLAGS, FLAGS_SIZE, 0);
-    if(timeout_flag){
-        timeout = atoi(timeout_flag);
+    if(function_timeout <= 0){
+        printf("--timeout not valid\n");
+        return 1;
     }
-   
-    const char *dynamic_lib_entrie = CArgvParse_get_flag(&args,DYNAMIC_LIV_FLAGS,FLAGS_SIZE,0);
+    int client_timeout = 500;
+    const char *client_timeout_flag = CArgvParse_get_flag(&args, CLIENT_TIMEOUT_FLAGS, FLAGS_SIZE, 1);
+    if(client_timeout_flag){
+        client_timeout = atoi(client_timeout_flag);
+    }
+    if(client_timeout <= 0){
+        printf("--timeout not valid\n");
+        return 1;
+    }
+
+    const char *dynamic_lib_entrie = CArgvParse_get_flag(&args,DYNAMIC_LIB_FLAGS,FLAGS_SIZE,0);
     if(!dynamic_lib_entrie){
         printf("--dynamic_lib library not provided\n");
         return 1;
     }
+
     bool is_absolute = dtw_starts_with(dynamic_lib_entrie, "/") || dtw_starts_with(dynamic_lib_entrie, "\\");
     if(is_absolute){
        strcpy(dynamic_lib_path, dynamic_lib_entrie);
@@ -90,8 +104,8 @@ int main(int argc, char *argv[]){
 
     
     CwebServer server = newCwebSever(port_num, main_sever);
-    server.function_timeout = 500;
-    server.client_timeout = 500;
+    server.function_timeout = function_timeout;
+    server.client_timeout = client_timeout;
     CwebServer_start(&server);
     return 0;
 }
