@@ -65,7 +65,7 @@ const char *VERSION_FLAGS[]={
 };
 const char *FUNCTION_TIMEOUT_FLAGS[]={
     "function_timeout",
-    "t"
+    "ft"
 };
 
 const char *CLIENT_TIMEOUT_FLAGS[]={
