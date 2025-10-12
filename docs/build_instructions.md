@@ -51,10 +51,12 @@ COMPILER     = "gcc"
 ```
 
 ## Obsolete
+```text
 ### Making your own build
 you can make your own build by using the following commands:
 ```bash
 darwin run_blueprint build/ --mode folder  
+\```
 ```
 
 than you can compile with gcc in the way you want:
