@@ -18,7 +18,7 @@ darwin install
 make a local build to test with the following command it will create the **CWebStudioFirmware** file, you can set the compiler here [build/config.lua](/build/config.lua) 
 ```bash
 darwin run_blueprint build/ --mode folder local_build 
-\```
+```
 ```
 
 ### Full Build from Docker or Podman
