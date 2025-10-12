@@ -9,12 +9,16 @@ if you are on linux you can install darwin with:
 curl -L https://github.com/OUIsolutions/Darwin/releases/download/0.2.1/darwin.c -o darwin.c &&
 gcc darwin.c -o darwin.out &&
 sudo mv darwin.out /usr/bin/darwin
+darwin install
 ```
 
+## Obsolete
+```text
 ### Local Build 
 make a local build to test with the following command it will create the **CWebStudioFirmware** file, you can set the compiler here [build/config.lua](/build/config.lua) 
 ```bash
 darwin run_blueprint build/ --mode folder local_build 
+\```
 ```
 
 ### Full Build from Docker or Podman
@@ -22,7 +26,7 @@ You must have podman or docker installed on your machine to build in these way, 
 
 if you want to make a full build to all platforms you can use the following command, it will create the following files:
 ```bash
-darwin run_blueprint build/ --mode folder amalgamation_build zip_build
+darwin run_blueprint --target amalgamation zip
 ```
 
 Output files:
@@ -46,11 +50,13 @@ YOUR_CHANGES = "--"
 COMPILER     = "gcc"
 ```
 
-
+## Obsolete
+```text
 ### Making your own build
 you can make your own build by using the following commands:
 ```bash
 darwin run_blueprint build/ --mode folder  
+\```
 ```
 
 than you can compile with gcc in the way you want:
