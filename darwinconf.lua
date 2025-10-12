@@ -15,7 +15,7 @@ darwin.add_recipe({
 
 function zip_build()
     os.execute("zip -r release/CWebStudioFirmware.zip dependencies docs build src")
-end 
+end
 
 darwin.add_recipe({
     name="zip",
