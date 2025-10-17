@@ -2,13 +2,17 @@
 
 ### Build Requirements 
 #### Darwin 
-For Build the project you must have [Darwin](https://github.com/OUIsolutions/Darwin) installed on version 0.2.1
+For Build the project you must have [Darwin](https://github.com/OUIsolutions/Darwin) installed on version 0.20 or later
 if you are on linux you can install darwin with:
 
 ```bash
-curl -L https://github.com/OUIsolutions/Darwin/releases/download/0.2.1/darwin.c -o darwin.c &&
+curl -L https://github.com/OUIsolutions/Darwin/releases/download/0.20/darwin.c -o darwin.c &&
 gcc darwin.c -o darwin.out &&
 sudo mv darwin.out /usr/bin/darwin
+```
+
+After installing Darwin, run the following command to install project dependencies:
+```bash
 darwin install
 ```
 
@@ -21,17 +25,27 @@ darwin run_blueprint build/ --mode folder local_build
 \```
 ```
 
-### Full Build from Docker or Podman
-You must have podman or docker installed on your machine to build in these way, you can set what you want to use on the [build/config.lua](/build/config.lua) file.
+### Building the Project
 
-if you want to make a full build to all platforms you can use the following command, it will create the following files:
+To build all targets, use the following command:
+```bash
+darwin run_blueprint --target all
+```
+
+Alternatively, you can build specific targets by providing their names (following the recipes in the darwinconf.lua file):
+```bash
+darwin run_blueprint --target amalgamation
+darwin run_blueprint --target zip
+```
+
+Available targets:
+- **amalgamation**: Creates a single amalgamated C file at `release/CWebStudioFirmware.c`
+- **zip**: Creates a zip archive at `release/CWebStudioFirmware.zip` containing dependencies, docs, build, and src folders
+
+You can also build multiple specific targets at once:
 ```bash
 darwin run_blueprint --target amalgamation zip
 ```
-
-Output files:
-- release/CWebStudioFirmware.c
-- release/CWebStudioFirmware.zip
 
 ### Build Configurations
 All build configurations are in the **build/config.lua** file.
